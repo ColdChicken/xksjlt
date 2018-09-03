@@ -1,0 +1,45 @@
+{
+  "pages": [
+    "pages/zixun/zixun",
+    "pages/tiwen/tiwen",
+    "pages/gongju/gongju",
+    "pages/wode/wode",
+    "pages/shuijing/shuijing"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "星空水景",
+    "navigationBarTextStyle": "black"
+  },
+  "tabBar": {
+    "position": "bottom",
+    "list": [
+      {
+        "pagePath": "pages/zixun/zixun",
+        "text": "资讯"
+      },
+      {
+        "pagePath": "pages/shuijing/shuijing",
+        "text": "水景"
+      },
+      {
+        "pagePath": "pages/tiwen/tiwen",
+        "text": "提问"
+      },
+      {
+        "pagePath": "pages/gongju/gongju",
+        "text": "工具"
+      },
+      {
+        "pagePath": "pages/wode/wode",
+        "text": "我的"
+      }
+    ]
+  },
+  "networkTimeout": {
+    "request": 10000,
+    "downloadFile": 10000
+  },
+  "debug": true
+}
