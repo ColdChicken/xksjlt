@@ -5,6 +5,7 @@ const request = (url, method="GET", data={}, auth=false, success=undefined) => {
   wx.request({
     url: requestUrl,
     method: method,
+    data: JSON.stringify(data),
     fail: function (res) {
       console.log("请求出错")
       console.log(res)
