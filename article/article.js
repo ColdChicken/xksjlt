@@ -13,11 +13,25 @@ class ArticleMgr {
                    tags: tags,
                    currentPos: currentPos,
                    requestCnt: pageLimit,
+                   containContent: 0,
                  }, // DATA
                  false, // AUTH
                  function(res) {
                    callback(res)
                  }) // SUCCESS
+  }
+
+  getArticle(id, callback) {
+    console.log(`开始获取文章详情 ${id}`)
+    util.request("/v1/api/article/getbyid", // URL
+                "POST", // METHOD
+                {
+                  id: id,
+                }, // DATA
+                false, // AUTH
+                function (res) {
+                  callback(res)
+                }) // SUCCESS
   }
 }
 

@@ -1,0 +1,48 @@
+<!--pages/content/content.wxml-->
+<scroll-view scroll-y class="content">
+  <view class="title">
+    {{article.title}}
+  </view>
+  <view class="metadata">
+    <view class="creater">{{article.creater}}</view>
+    <view class="datetime">{{article.createTime}}</view>
+    <view class="tags">{{article.tags}}</view>
+  </view>
+
+  <view class="contents" wx:for="{{article.content.contents}}" wx:key="{{index}}">
+    <view class="block" wx:if="{{ item.type === 'block' }}">
+      <block  wx:for="{{item.contents}}" wx:key="{{index}}">
+        <view class="block_txt" wx:if="{{item.type === 'block_txt'}}">
+          {{item.content}}
+        </view>
+        <view class="block_underline" wx:elif="{{item.type === 'block_underline'}}">
+          {{item.content}}
+        </view>
+        <view class="block_ref" wx:elif="{{item.type === 'block_ref'}}" bindtap="tapBlockRef" data-link="{{item.link}}">
+          {{item.content}}
+        </view>
+      </block>
+    </view>
+
+    <view wx:elif="{{ item.type === 'list' }}">
+    </view>
+
+    <view wx:elif="{{ item.type === 'ref' }}">
+    </view>
+
+    <view class="section" wx:elif="{{ item.type === 'section' }}">
+      <view class="section_level_1" wx:if="{{ item.section_level == 1 }}">
+        {{item.content}}
+      </view>
+      <view class="section_level_2" wx:elif="{{ item.section_level == 2 }}">
+        {{item.content}}
+      </view>
+      <view class="section_level_3" wx:else>
+        {{item.content}}
+      </view>
+    </view>
+
+    <view wx:else>
+    </view>
+  </view>
+</scroll-view>

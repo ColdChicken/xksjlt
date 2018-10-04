@@ -1,0 +1,44 @@
+/* articles-list/articles-list.wxss */
+.article-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.article-list .contents {
+  height: 100vh;
+  flex-direction: column;
+}
+
+.contents .content {
+  border-bottom: 1px solid #576B95;
+  padding: 10rpx;
+}
+
+.content .title {
+  font-size: 16pt;
+  color: #576B95;
+  overflow: hidden;
+}
+
+.content .loading {
+  font-size: 16pt;
+  color: #576B95;
+}
+
+.content .metadata {
+  display: flex;
+  font-size: 9pt;
+  color: #888888;
+}
+
+.metadata .creater {
+  margin-right: 10rpx;
+}
+
+.metadata .datetime {
+  margin-right: 10rpx;
+}
+
+.metadata .tags {
+
+}

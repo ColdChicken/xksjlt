@@ -1,0 +1,20 @@
+<!--articles-list/articles-list.wxml-->
+<view class="article-list">
+  <scroll-view class="contents" scroll-y bindscrolltolower="lower" >
+    <view class="content" wx:for="{{articles}}" wx:key="{{item.id}}" bindtap="tap" data-articleid="{{item.id}}">
+      <view class="title"> 
+        {{item.title}}
+      </view>
+      <view class="metadata">
+        <view class="creater">{{item.creater}}</view>
+        <view class="datetime">{{item.createTime}}</view>
+        <view class="tags">{{item.tags}}</view>
+      </view>
+    </view>
+    <view wx:if="{{inLoading}}" class="content">
+      <view class="loading" style="text-align:center; height: 100%;"> 
+          加载中......
+      </view>
+    </view>
+  </scroll-view>
+</view>

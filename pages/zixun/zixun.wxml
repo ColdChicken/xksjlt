@@ -1,2 +1,5 @@
 <!--pages/zixun/zixun.wxml-->
-<text>pages/zixun/zixun.wxml</text>
+<view>
+  <articles-list-component articles="{{articles}}" in-loading="{{inLoading}}" bindrefresh="getArticles" bindshowContent="showArticlePage">
+  </articles-list-component>
+</view>

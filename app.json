@@ -4,7 +4,8 @@
     "pages/tiwen/tiwen",
     "pages/gongju/gongju",
     "pages/wode/wode",
-    "pages/shuijing/shuijing"
+    "pages/shuijing/shuijing",
+    "pages/content/content"
   ],
   "window": {
     "backgroundTextStyle": "light",

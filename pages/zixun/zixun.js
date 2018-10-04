@@ -15,6 +15,8 @@ Page({
     tags: [],
     // 文章列表
     articles: [],
+    // 是否处在加载中
+    inLoading: false,
   },
 
   /**
@@ -26,6 +28,7 @@ Page({
       pageLimit: 10,
       tags: [],
       articles: [],
+      inLoading: false,
     })
   },
 
@@ -43,11 +46,29 @@ Page({
    */
   getArticles: function() {
     var that = this
+    that.setData({
+      inLoading: true
+    })
     this.articleMgr.getArticles(this.data.currentPos, this.data.pageLimit, this.data.tags, function(articles) {
+      var newArticles = that.data.articles
+      for (var article of articles) {
+        newArticles.push(article)
+      }
       that.setData({
         currentPos: that.data.currentPos + articles.length,
-        articles: articles,
+        articles: newArticles,
+        inLoading: false,
       })
+    })
+  },
+
+  /**
+   * 跳转到文章详情页面
+   */
+  showArticlePage: function(e) {
+    var articleId = e.detail.articleId
+    wx.navigateTo({
+      url: `/pages/content/content?id=${articleId}`
     })
   },
 
