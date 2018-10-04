@@ -9,7 +9,7 @@
     <view class="tags">{{article.tags}}</view>
   </view>
 
-  <view class="contents" wx:for="{{article.content.contents}}" wx:key="{{index}}">
+  <block wx:for="{{article.content.contents}}" wx:key="{{index}}">
     <view class="block" wx:if="{{ item.type === 'block' }}">
       <block  wx:for="{{item.contents}}" wx:key="{{index}}">
         <view class="block_txt" wx:if="{{item.type === 'block_txt'}}">
@@ -19,15 +19,73 @@
           {{item.content}}
         </view>
         <view class="block_ref" wx:elif="{{item.type === 'block_ref'}}" bindtap="tapBlockRef" data-link="{{item.link}}">
-          {{item.content}}
+          {{item.content}}[{{item.ref_idx}}]
         </view>
       </block>
     </view>
 
-    <view wx:elif="{{ item.type === 'list' }}">
-    </view>
+    <block wx:elif="{{ item.type === 'ref' }}">
+      <block wx:if="{{ item.source === 'txt'}}">
+        <view class="ref_txt">
+          <view class="ref_txt_content">{{ item.content }}</view>
+          <view class="ref_txt_value">
+            -- {{ item.value }}
+          </view>
+        </view>
+      </block>
 
-    <view wx:elif="{{ item.type === 'ref' }}">
+      <block wx:elif="{{ item.source === 'link'}}">
+        <view class="ref_link">
+          <view class="ref_link_content" bindtap="tapBlockRef" data-link="{{item.value}}">{{ item.content }}</view>
+        </view>
+      </block>
+
+      <block wx:if="{{ item.source === 'ref'}}">
+        <view class="ref_ref">
+          <view class="ref_ref_content">{{ item.content }}</view>
+          <view class="ref_ref_value">
+            -- {{ item.value }}[{{item.ref_idx}}]
+          </view>
+        </view>
+      </block>
+
+      <block wx:if="{{ item.source === 'img'}}">
+        <view class="ref_img">
+          <image style="width: 100%;" mode="aspectFit" src="{{item.value}}"></image>
+          <view class="ref_img_content">{{ item.content }}</view>
+        </view>
+      </block>
+    </block>
+
+    <view wx:elif="{{ item.type === 'list' }}">
+      <view class="list" wx:if="{{ item.ordered === true }}">
+        <view class="list_ordered" wx:for="{{item.contents}}" wx:key="{{index}}">
+          {{index + 1}}. 
+          <view class="block_txt" wx:if="{{item.type === 'block_txt'}}">
+            {{item.content}}
+          </view>
+          <view class="block_underline" wx:elif="{{item.type === 'block_underline'}}">
+            {{item.content}}
+          </view>
+          <view class="block_ref" wx:elif="{{item.type === 'block_ref'}}" bindtap="tapBlockRef" data-link="{{item.link}}">
+            {{item.content}}
+          </view>
+        </view>
+      </view>
+      <view class="list" wx:else>
+        <view class="list_unordered" wx:for="{{item.contents}}" wx:key="{{index}}">
+          *  
+          <view class="block_txt" wx:if="{{item.type === 'block_txt'}}">
+            {{item.content}}
+          </view>
+          <view class="block_underline" wx:elif="{{item.type === 'block_underline'}}">
+            {{item.content}}
+          </view>
+          <view class="block_ref" wx:elif="{{item.type === 'block_ref'}}" bindtap="tapBlockRef" data-link="{{item.link}}">
+            {{item.content}}
+          </view>
+        </view>
+      </view>
     </view>
 
     <view class="section" wx:elif="{{ item.type === 'section' }}">
@@ -44,5 +102,22 @@
 
     <view wx:else>
     </view>
+  </block>
+
+  <view class="ref_contents">
+    <block wx:for="{{refs}}" wx:key="{{index}}">
+      <block wx:if="{{ item.ref_origin === 'ref' }}">
+        <view class="ref_content">
+          [{{item.ref_idx}}] {{item.value}}
+        </view>
+      </block>
+      <block wx:elif="{{ item.ref_origin === 'block_ref' }}">
+        <view class="ref_content">
+          [{{item.ref_idx}}] {{item.link}}
+        </view>
+      </block>
+    </block>
   </view>
+
+  <view class="height30"></view>
 </scroll-view>

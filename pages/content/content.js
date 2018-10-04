@@ -8,7 +8,8 @@ Page({
    */
   data: {
     articleId: -1,
-    article: {}
+    article: {},
+    refs: [],
   },
 
   /**
@@ -33,14 +34,35 @@ Page({
       // 转JSON
       article.content = JSON.parse(article.content)
       // 处理content
+      var ref_idx = 1
+      var refs = []
       for (var content of article.content.contents) {
         if (content.type == 'section') {
           content.section_level = content.section_id.split('.').length
         }
+        if (content.type == 'ref' && content.source == 'ref') {
+          content.ref_idx = ref_idx
+          ref_idx += 1
+          content.ref_origin = 'ref'
+          refs.push(content)
+        }
+        if (content.type == 'block') {
+          for (var block_content of content.contents) {
+            if (block_content.type == 'block_ref') {
+              block_content.ref_idx = ref_idx
+              ref_idx += 1
+              block_content.ref_origin = 'block_ref'
+              refs.push(block_content)
+            }
+          }
+        }
       }
+
+      console.log(refs)
 
       that.setData({
         article: article,
+        refs: refs,
       })
     })
   },
